@@ -1,0 +1,70 @@
+{
+  "background": {
+    "permissions": ["http://*/*", "https://*/*"],
+    "scripts": ["lib/jquery.js", "background.js"]
+  },
+  "browser_action": {
+    "default_icon": "img/icon128.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "lib/jquery.js",
+        "lib/bill.js",
+        "lib/key.js",
+        "sites/bestbuyUS.js"
+      ],
+      "matches": ["*://*.bestbuy.com/*"],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "lib/jquery.js",
+        "lib/bill.js",
+        "lib/key.js",
+        "sites/bestbuyCA.js"
+      ],
+      "matches": ["*://*.bestbuy.ca/*"],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "lib/jquery.js",
+        "lib/bill.js",
+        "lib/key.js",
+        "sites/bestbuyMX.js"
+      ],
+      "matches": ["*://*.bestbuy.com.mx/*", "*://*.adyen.com/*"],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "js": ["lib/jquery.js", "sites/paypal.js"],
+      "matches": ["*://*.paypal.com/*"],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "description": "BestBuy Bot developed and sold by Cggaming732",
+  "icons": {
+    "128": "img/icon128.png"
+  },
+  "manifest_version": 2,
+  "name": "BestBuy Bot",
+  "permissions": [
+    "cookies",
+    "browsingData",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "system.cpu",
+    "notifications",
+    "background",
+    "tts"
+  ],
+  "version": "1.6.6",
+  "web_accessible_resources": ["*.mp3"]
+}

@@ -1,0 +1,433 @@
+<!doctype html>
+<head>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <script src="lib/jquery.js"></script>
+  <script src="popup.js"></script>
+  <meta charset="utf-8"></script>
+  <title>BestBuy Bot By cggaming732</title>   
+</head>
+<style>
+h3:hover {
+    color: #ffffff;
+}
+
+h3 {
+    font-size: 24px;
+    color: #ffffff;
+    
+}
+</style>
+
+<body background="img/image.jpg" style="width:400px;color:white;">
+	<div align="center">
+		
+			<h2>BestBuy Bot</h2></span>
+		</a>
+	</div>
+	<hr size=15 width=400 align="center" style="padding-left:20px;padding-right:20px;">
+    <div class="mainContainer form-horizontal" style="padding-left:50px;padding-right:30px;">
+		<span id="update" style="color:red; font-size:16px;"></span>	
+        <div class="formContainer form-group">
+				<label class="col-sm-2 control-label">Select Website:</label>
+				<div class="col-sm-10">
+					<select name="site" id="site" class="size-dropdown form-control">
+						<option value="com">bestbuy.com</option>					
+						<option value="ca">bestbuy.ca</option>					
+					</select>
+				</div>
+				<label class="col-sm-2 control-label">Select Product Finding Method:</label>
+				<div class="col-sm-10">
+					<select name="productSearch" id="productSearch" class="size-dropdown form-control">
+						<option value="directLink">By Direct Link</option>					
+						<option value="keywordSearching">By Site Search</option>					
+						<option value="ProductpageSearching">By Search From A Products/Collection Page Link</option>					
+					</select>				
+				</div>
+				<div id="product_page">
+					  <label class="col-sm-2 control-label">Enter The Collection Page Link:</label>
+					<div class="col-sm-10">
+						<input type="text" name="purl" id="purl" class="form-control" placeholder="Enter the collection page url">
+					</div>
+				</div>
+				<div style="display:none;">		
+					<label class="col-sm-2 control-label">Select Size:</label> 
+					<div class="col-sm-10">
+						<select name="shoesSize" id="shoesSize" class="size-dropdown form-control">
+							<option name="skuId" value="free">Free Size</option>
+							<option name="skuId" value="custom">Custom Size</option>
+							<option name="skuId" value="2">2</option>
+							<option name="skuId" value="3">3</option>
+							<option name="skuId" value="4">4</option>
+							<option name="skuId" value="5"> 5</option>
+							<option name="skuId" value="5.5"> 5.5</option>
+							<option name="skuId" value="6"> 6</option>
+							<option name="skuId" value="6.5"> 6.5</option>
+							<option name="skuId" value="7"> 7</option>
+							<option name="skuId" value="7.5"> 7.5</option>
+							<option name="skuId" value="8"> 8</option>
+							<option name="skuId" value="8.5"> 8.5</option>
+							<option name="skuId" value="9"> 9</option>
+							<option name="skuId" value="9.5"> 9.5</option>
+							<option name="skuId" value="10"> 10</option>
+							<option name="skuId" value="10.5"> 10.5</option>
+							<option name="skuId" value="11"> 11</option>
+							<option name="skuId" value="11.5"> 11.5</option>
+							<option name="skuId" value="12"> 12</option>
+							<option name="skuId" value="12.5"> 12.5</option>
+							<option name="skuId" value="13"> 13</option>
+							<option name="skuId" value="13.5"> 13.5</option>
+							<option name="skuId" value="14"> 14</option>
+							<option name="skuId" value="14.5"> 14.5</option>
+							<option name="skuId" value="15"> 15</option>
+							<option name="skuId" value="15.5"> 15.5</option>
+							<option name="skuId" value="16"> 16</option>
+							<option name="skuId" value="16.5"> 16.5</option>
+							<option name="skuId" value="17"> 17</option>
+							<option name="skuId" value="17.5"> 17.5</option>		
+						</select>
+					</div>
+					<div id="customSizeDiv">
+						<label class="col-sm-2 control-label">Enter Custom Size:</label>
+						<div class="col-sm-10">
+							<input name="size2" type="text" class="form-control" placeholder="Please enter custom size same as website" id="size2" />
+						</div>
+					</div>	
+					
+					<label class="col-sm-2 control-label">Enter Product Colors:</label>
+					<div class="col-sm-10">
+						<input name="colors" type="text" class="form-control" placeholder="Enter colors separated by comma(,)" id="colors" />
+					</div>
+				</div>
+				<div id="url_div">
+					 <label class="col-sm-2 control-label">Enter The Product Page URL:</label>
+					<div class="col-sm-10">
+						<input type="text" name="url" id="url" class="form-control" placeholder="Enter the product page url.">
+					</div>
+				</div>
+				
+				<div id="keywords_div">
+					<label class="col-sm-2 control-label">Keywords Operation:</label>	
+					<div class="col-sm-10">
+						<select name="KeywordsType" id="KeywordsType" class="size-dropdown form-control">
+							<option value="and" selected>AND</option>
+							<option value="or" >OR</option>
+						</select>
+					</div>	
+				<label class="col-sm-2 control-label">Enter Product Keywords(unique):</label>
+				<div class="col-sm-10">
+					<input name="keywords" id="keywords" type="text"  class="form-control" placeholder="Enter product keywords separated by comma(,)"/>
+				</div>
+															
+				<label class="col-sm-2 control-label">Keywords Negative Keyword:</label>	
+				<div class="col-sm-10">
+					<input type="text" name="keywords2"   id="keywords2"  class="form-control" placeholder="Enter product Negative keywords. Must be separated by comma(,)">
+				</div>													
+			</div>							
+							
+			<label class="col-sm-2 control-label">Enter Refresh Time Range:</label>
+			<div class="col-sm-10">
+				<ul style="list-style-type:none; display: inline-flex;padding: 0px;margin-bottom: 0px;">
+					<li><input type="number"  name="timeout" id="timeout" class="form-control" placeholder="min" style="text-align:center;"></li>
+					<li><h4 style="padding:0px 10px;">  To </h4></li>
+					<li><input type="number" name="timeoutMax" id="timeoutMax" class="form-control" placeholder="Max" style="text-align:center;"></li>
+				</ul>
+			</div>
+			<div style="display:none">
+				<label class="col-sm-2 control-label">Enter Quantity:</label>	
+				<div class="col-sm-10">
+					<input name="quantity" type="number" class="form-control" placeholder="Enter  Quantity" id="quantity" />
+				</div>
+			</div>
+						
+
+			<label class="col-sm-2 control-label">Add Warranty:</label>	
+			<div class="col-sm-10">
+				<select name="warranty" id="warranty" class="size-dropdown form-control">
+					<option value="no" selected>No</option>
+					<option value="yes" >Yes</option>
+				</select>
+			</div>
+			<label class="col-sm-2 control-label">Price Range</label>
+				<div class="col-sm-10">
+					<ul style="list-style-type:none; display: inline-flex;padding: 0px;margin-bottom: 0px;">
+						<li><input type="number"  name="low" id="low" class="form-control" placeholder="low" min="0" style="text-align:center;"></li>
+						<li><h4 style="padding:0px 10px;">  To </h4></li>
+						<li><input type="number" name="high" id="high" class="form-control" placeholder="high" min="0" style="text-align:center;"></li>
+					</ul>
+				</div>
+			<div id="warrantyDiv">
+				<label class="col-sm-2 control-label">Add Waranty Year:</label>
+				<div class="col-sm-10">
+					<select name="warantyYear" id="warantyYear" class="size-dropdown form-control">
+						<option  value="1" selected>1</option>  
+						<option  value="2">2</option> 					
+						<option  value="3">3</option> 					
+					</select>
+				</div>
+			</div>
+			<label class="col-sm-2 control-label">Sound Alert After Add To Cart:</label>
+			<div class="col-sm-10">
+				<select name="soundAlert" id="soundAlert" class="size-dropdown form-control">
+					<option  value="yes" selected>Yes</option>  
+					<option  value="no">No</option> 					
+				</select>
+			</div> 	
+			<label class="col-sm-2 control-label">Checkout On pre-Order:</label>
+			<div class="col-sm-10">
+				<select name="preOrder" id="preOrder" class="size-dropdown form-control">
+				<option  value="yes"selected>Yes</option>
+				<option  value="no">No</option>              
+				</select>
+			</div> 
+			<label class="col-sm-2 control-label">Store Pick Up:</label>
+			<div class="col-sm-10">
+				<select name="storePickup" id="storePickup" class="size-dropdown form-control">                   
+					<option value="no" selected>No</option>  
+					<option value="yes" >Yes</option> 					
+				</select>
+			</div>
+			<label class="col-sm-2 control-label">Auto Checkout:</label>
+			<div class="col-sm-10">
+				<select name="autocheckoutselect" id="autocheckoutselect" class="size-dropdown form-control">                   
+					<option name="autocheckoutselectname" value="yes" id="autocheckoutselect2" >Yes</option>  
+					<option name="autocheckoutselectname" value="no" id="autocheckoutselect1" >No</option> 					
+				</select>
+			</div>               
+			<div id="autocheckout">
+				<div style="display:none">
+					<label class="col-sm-2 control-label">Checkout Type:</label>
+					<div class="col-sm-10">
+						<select name="checkoutType" id="checkoutType" class="size-dropdown form-control">
+						<option name="checkoutTypeSelect" value="complete" id="checkoutType2" selected>Full Checkout</option>
+						<option name="checkoutTypeSelect" value="partial" id="checkoutType1" >AutoFill Only</option>              
+						</select>
+					</div>
+				</div>
+				<label class="col-sm-2 control-label">Using Guest Checkout :</label>
+				<div class="col-sm-10">
+					<select name="guestCheckout" id="guestCheckout" class="size-dropdown form-control">                   
+						<option  value="yes">Yes</option>  
+						<option  value="no" >No</option> 					
+					</select>
+				</div> 
+                <div style="display:none;">				
+					<label class="col-sm-2 control-label">Checkout Delay:</label>
+					<div class="col-sm-10">
+						<input type="text" name="checkoutDelay" id="checkoutDelay" class="form-control" placeholder="Enter Checkout Delay">
+					</div>
+				</div>
+				<div  id="login">	
+					<span align="center" id="loginLine"><h3>WEBSITE LOGIN</h3></span>
+					<div id="loginDiv">
+						<label class="col-sm-2 control-label">Login Id:</label>
+						<div class="col-sm-10">
+							<input type="text" name="username" id="username" class="form-control" placeholder="Enter UserId">
+						</div>
+						<label class="col-sm-2 control-label">Login Password:</label>
+						<div class="col-sm-10">
+							<input type="text" name="password" id="password" class="form-control" placeholder="Enter Password">
+						</div>				
+					</div>
+				</div>				
+				<span align="center" id="billingLine"><h3>BILLING ADDRESS</h3></span>                  
+				<div id="billingAddressDiv">           
+					<label class="col-sm-2 control-label">First Name:</label>
+					<div class="col-sm-10">
+						<input type="text" name="billFirstName" id="billFirstName" class="form-control" placeholder="Enter First Name">
+					</div>
+					<label class="col-sm-2 control-label">Last Name:</label>
+					<div class="col-sm-10">
+						<input type="text" name="billLastName" id="billLastName" class="form-control" placeholder="Enter Last Name">
+					</div>
+					<label class="col-sm-2 control-label">Street Address1:</label>
+					<div class="col-sm-10">
+						<input type="text" name="billStreetAddress1" id="billStreetAddress1" class="form-control" placeholder="Enter Street Address1">
+					</div>
+					<label class="col-sm-2 control-label">Street Address2:</label>
+					<div class="col-sm-10">
+						<input type="text" name="billStreetAddress2" id="billStreetAddress2" class="form-control" placeholder="Enter Street Address2">
+					</div>
+					<label class="col-sm-2 control-label">Zip Code:</label>
+					<div class="col-sm-10">
+						<input type="text" name="billZipCode" id="billZipCode" class="form-control" placeholder="Enter Zip Code">
+					</div>
+					<label class="col-sm-2 control-label">Colonia(Only For Mexico):</label>
+					<div class="col-sm-10">
+						<input type="text" name="Colonia" id="Colonia" class="form-control" placeholder="Enter Colonia same as website">
+					</div>
+					<label class="col-sm-2 control-label">City:</label>
+					<div class="col-sm-10">
+						<input type="text" name="billCity" id="billCity" class="form-control" placeholder="Enter City">
+					</div>
+					<label class="col-sm-2 control-label">Country:</label>
+					<div class="col-sm-10">
+						<select id="billCountry" name="billCountry" class="form-control">			
+							<option data-code="US" value="United States" selected="selected">United States</option>
+							<option data-code="CA" value="Canada" >Canada</option>
+							<option data-code="MX" value="Mexico" >Mexico</option>
+						</select>  
+					</div>						
+					<label class="col-sm-2 control-label">State:</label>
+					<div class="col-sm-10" id="statesInputBill">
+						<select name="billState" id="billState" class="form-control">
+							<optgroup  label="USA State">
+								<option value="AL">AL</option><option value="AK">AK</option><option value="AP">AP</option><option value="AE">AE</option><option value="AA">AA</option><option value="AZ">AZ</option><option value="AR">AR</option><option value="CA">CA</option><option value="CO">CO</option><option value="CT">CT</option><option value="DC">DC</option><option value="DE">DE</option><option value="FL">FL</option><option value="GA">GA</option><option value="GU">GU</option><option value="HI">HI</option><option value="ID">ID</option><option value="IL">IL</option><option value="IN">IN</option><option value="IA">IA</option><option value="KS">KS</option><option value="KY">KY</option><option value="LA">LA</option><option value="ME">ME</option><option value="MD">MD</option><option value="MA">MA</option><option value="MI">MI</option><option value="MN">MN</option><option value="MS">MS</option><option value="MO">MO</option><option value="MT">MT</option><option value="NE">NE</option><option value="NV">NV</option><option value="NH">NH</option><option value="NJ">NJ</option><option value="NM">NM</option><option value="NY">NY</option><option value="NC">NC</option><option value="ND">ND</option><option value="OH">OH</option><option value="OK">OK</option><option value="OR">OR</option><option value="PA">PA</option><option value="RI">RI</option><option value="SC">SC</option><option value="SD">SD</option><option value="TN">TN</option><option value="TX">TX</option><option value="UT">UT</option><option value="VT">VT</option><option value="VA">VA</option><option value="VI">VI</option><option value="WA">WA</option><option value="WV">WV</option><option value="WI">WI</option><option value="WY">WY</option>
+							</optgroup>										
+						</select> 
+					</div>            
+					<label class="col-sm-2 control-label">Phone:</label>
+					<div class="col-sm-10">
+						<input type="text" name="billPhone" id="billPhone" class="form-control" placeholder="Enter Phone Number">
+					</div>
+					<label class="col-sm-2 control-label">Email Address:</label>
+					<div class="col-sm-10">
+						<input type="text" name="billEmail" id="billEmail" class="form-control" placeholder="Enter Email Address">
+					</div>				  
+					<span align="center"><h3>SHIPPING ADDRESS</h3></span>
+					<div align="left">
+						<input type="radio" value="bill" name="shipAddress" id="bill" checked="checked"> Ship To Billing Address.
+					</div>
+					<div align="left">
+						<input type="radio" value="new" name="shipAddress" id="new"> Ship To Following Address.
+					</div> 
+				</div>                                         
+				<div id="newAddressDiv">    
+					<label class="col-sm-2 control-label">Country:</label>
+					<div class="col-sm-10">
+						<select id="newCountry" name="newCountry" class="form-control">			
+							<option data-code="US" value="United States">United States</option>
+							<option data-code="CA" value="Canada" >Canada</option>
+						</select>  
+					</div>
+					<label class="col-sm-2 control-label">First Name:</label>
+					<div class="col-sm-10">
+						<input type="text" name="newFirstName" id="newFirstName" class="form-control" placeholder="Enter First Name">
+					</div>
+					<label class="col-sm-2 control-label">Last Name:</label>
+					<div class="col-sm-10">
+						<input type="text" name="newLastName" id="newLastName" class="form-control" placeholder="Enter Last Name"> 
+					</div>
+					<label class="col-sm-2 control-label">Street Address1:</label>
+					<div class="col-sm-10">
+						<input type="text" name="newStreetAddress1" id="newStreetAddress1" class="form-control" placeholder="Enter Street Address1">
+					</div>
+						<label class="col-sm-2 control-label">Street Address2:</label>
+					<div class="col-sm-10">
+						<input type="text" name="newStreetAddress2" id="newStreetAddress2" class="form-control" placeholder="Enter Street Address2">
+					</div>
+					<label class="col-sm-2 control-label">Zip Code:</label>
+					<div class="col-sm-10">
+						<input type="text" name="newZipCode" id="newZipCode" class="form-control" placeholder="Enter Zip Code"> 
+					</div>
+					<label class="col-sm-2 control-label">City:</label>
+					<div class="col-sm-10">
+						<input type="text" name="newCity" id="newCity" class="form-control" placeholder="Enter City"> 
+					</div>
+					<label class="col-sm-2 control-label">State:</label>
+					<div class="col-sm-10" id="statesInputShip" >
+						<select name="newState" id="newState" class="form-control">
+							<optgroup  label="USA State">
+								<option value="AL">AL</option><option value="AK">AK</option><option value="AP">AP</option><option value="AE">AE</option><option value="AA">AA</option><option value="AZ">AZ</option><option value="AR">AR</option><option value="CA">CA</option><option value="CO">CO</option><option value="CT">CT</option><option value="DC">DC</option><option value="DE">DE</option><option value="FL">FL</option><option value="GA">GA</option><option value="GU">GU</option><option value="HI">HI</option><option value="ID">ID</option><option value="IL">IL</option><option value="IN">IN</option><option value="IA">IA</option><option value="KS">KS</option><option value="KY">KY</option><option value="LA">LA</option><option value="ME">ME</option><option value="MD">MD</option><option value="MA">MA</option><option value="MI">MI</option><option value="MN">MN</option><option value="MS">MS</option><option value="MO">MO</option><option value="MT">MT</option><option value="NE">NE</option><option value="NV">NV</option><option value="NH">NH</option><option value="NJ">NJ</option><option value="NM">NM</option><option value="NY">NY</option><option value="NC">NC</option><option value="ND">ND</option><option value="OH">OH</option><option value="OK">OK</option><option value="OR">OR</option><option value="PA">PA</option><option value="RI">RI</option><option value="SC">SC</option><option value="SD">SD</option><option value="TN">TN</option><option value="TX">TX</option><option value="UT">UT</option><option value="VT">VT</option><option value="VA">VA</option><option value="VI">VI</option><option value="WA">WA</option><option value="WV">WV</option><option value="WI">WI</option><option value="WY">WY</option>
+							</optgroup>
+							
+						</select>            
+					</div>
+					<label class="col-sm-2 control-label">Phone:</label>
+					<div class="col-sm-10">
+						<input type="text" name="newPhone" id="newPhone" class="form-control" placeholder="Enter Phone Number"> 
+					</div>
+					<label class="col-sm-2 control-label">Email Address:</label>
+					<div class="col-sm-10">
+						<input type="text" name="newEmail" id="newEmail" class="form-control" placeholder="Enter Email Address"> 
+					</div>
+				</div>
+				<span align="center" id="payment"><h3>PAYMENT METHOD</h3></span>
+				<div id="paymentMethodDiv">
+					<label class="col-sm-2 control-label">Payment Method:</label>
+					<div class="col-sm-10">
+						<select id="paymentMethod" name="paymentMethod" class="form-control">
+							<option value="paypal">PayPal</option>
+							<option value="creditCard">CreditCard</option>							
+						</select>
+					</div>
+                    <br/> 					
+					<div id="paypalDiv">
+						<label class="col-sm-2 control-label">PayPal Id:</label>
+						<div class="col-sm-10">
+							<input type="text" name="paypalEmail" id="paypalEmail" style="color:grey;" class="form-control" placeholder="Enter PayPal Id">
+						</div>
+						<label class="col-sm-2 control-label">PayPal Password:</label>
+						<div class="col-sm-10">
+							<input type="text" name="paypalPassword" id="paypalPassword" style="color:grey;" class="form-control" placeholder="Enter PayPal Password">
+						</div> 				
+					</div>
+					<div id="creditcardDiv"> 
+						<label class="col-sm-2 control-label">Card Type:</label>
+						<div class="col-sm-10">
+							<select id="paymentCard" name="paymentCard" class=" form-control">
+								<option value="MC">MasterCard</option>								
+								<option value="VI">Visa</option>
+								<option value="AE">American Express</option>
+								<option value="DI">Discover</option>
+								<option value="JCB">JCB</option>
+							</select>
+						</div>					
+						<label class="col-sm-2 control-label">Card Number:</label> 
+						<div class="col-sm-10">                        
+							<input type="text" style="color:grey;" autocomplete="off" maxlength="19" size="19" value="" name="payMethodPaneCardNumber" id="cardNumber" class="form-control">
+						</div>
+						<label class="col-sm-2 control-label">Name On Card:</label> 
+						<div class="col-sm-10">
+							<input type="text" style="color:grey;" autocomplete="off" value="" name="cardHolderName" id="cardHolderName" class="form-control"> </div>            
+						<label class="col-sm-2 control-label">Expiration Date:</label>
+						<div class="col-sm-10">
+							<select name="payMethodPaneExpireMonth" id="expireMonth" class="form-control" >                   
+								<option value="01">January</option>
+								<option value="02">February</option>
+								<option value="03">March</option>
+								<option value="04">April</option>
+								<option value="05">May</option>
+								<option value="06">June</option>
+								<option value="07">July</option>
+								<option value="08">August</option>
+								<option value="09">September</option>
+								<option value="10">October</option>
+								<option value="11">November</option>
+								<option value="12">December</option>
+							</select>
+							<select name="payMethodPaneExpireYear" id="expireYear" class="form-control" > 
+								<option value="19">2019</option>
+								<option value="20">2020</option>
+								<option value="21">2021</option>
+								<option value="22">2022</option>
+								<option value="23">2023</option>
+								<option value="24">2024</option>
+								<option value="25">2025</option>
+								<option value="26">2026</option>
+								<option value="27">2027</option>
+								<option value="28">2028</option>
+								<option value="29">2029</option>
+								<option value="30">2030</option>
+								<option value="31">2031</option>
+								<option value="32">2032</option>
+							</select>
+						</div>
+						<label class="col-sm-2 control-label">Card CVV:</label>
+						<div class="col-sm-10">
+							<input type="text" maxlength="4" style="color:grey;" size="3" id="cardCVV" name="payMethodPaneCVV" class="form-control">
+						</div>
+					</div>
+				</div>
+			</div><br/>
+			<div align="center">
+				<button href="#" id="save" value="SAVE"class="btn-info myButton btn btn-large" style="align:center;">
+					<span align="center"><h4> SAVE </h4></span>
+				</button>			
+				<button href="#" id="start" value="START"class="btn-success myButton btn btn-large" style="align:center;">
+					<span align="center"><h4> START </h4></span>
+				</button>
+			</div>
+        </div>
+    </div> 
+</body>
+
